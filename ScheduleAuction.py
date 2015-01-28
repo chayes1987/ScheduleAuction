@@ -1,5 +1,10 @@
 __author__ = 'Conor'
 
+# The official documentation was consulted for all three 3rd party libraries used
+# Mongo -> http://api.mongodb.org/python/current/tutorial.html
+# ZeroMQ -> https://learning-0mq-with-pyzmq.readthedocs.org/en/latest/pyzmq/patterns/pubsub.html
+# APScheduler -> https://apscheduler.readthedocs.org/en/latest/userguide.html#code-examples
+
 from pymongo import MongoClient
 from apscheduler.schedulers.background import BlockingScheduler
 from datetime import datetime
