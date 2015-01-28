@@ -12,15 +12,15 @@ context = zmq.Context()
 class AuctionScheduler:
 
     @staticmethod
-    def initialize_publisher():
-        global publisher
-        publisher = context.socket(zmq.PUB)
-        publisher.bind('tcp://127.0.0.1:1000')
+    def get_auction_items(database):
+        return database.auctions.find()
 
     @staticmethod
-    def get_auction_items(database):
-        print('Retrieving auction items...')
-        return database.auctions.find()
+    def publish_start_auction_command(item_id):
+        if None != publisher:
+            message = "StartAuction #{id}".format(id=item_id)
+            publisher.send_string(message)
+            print(message + " command published...")
 
     def schedule_jobs(self, sched, auction_items):
         for item in auction_items:
@@ -40,11 +40,21 @@ class AuctionScheduler:
             print('Scheduler Stopped...')
             pass
 
+    @staticmethod
+    def initialize_publisher():
+        global publisher
+        publisher = context.socket(zmq.PUB)
+        publisher.bind('tcp://127.0.0.1:1000')
+
 
 if __name__ == '__main__':
     auctionScheduler = AuctionScheduler()
     client = MongoClient()
+    print('Connected to MongoDB...')
     db = client.AuctionData
     jobs = auctionScheduler.get_auction_items(db)
+    print('Auction items retrieved...')
     auctionScheduler.initialize_publisher()
+    print('Publisher initialized...')
     auctionScheduler.initialize_scheduler(jobs)
+    print('Scheduler initialized...')
