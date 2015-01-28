@@ -15,7 +15,7 @@
   </component>
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/ScheduleAuction$ScheduleAuction.coverage" NAME="ScheduleAuction Coverage Results" MODIFIED="1422484156957" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/ScheduleAuction$ScheduleAuction.coverage" NAME="ScheduleAuction Coverage Results" MODIFIED="1422484396894" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
@@ -32,11 +32,9 @@
       <file leaf-file-name="ScheduleAuction.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ScheduleAuction.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.3836478" vertical-offset="106" max-vertical-offset="595">
-              <caret line="17" column="17" selection-start-line="17" selection-start-column="17" selection-end-line="17" selection-end-column="17" />
-              <folding>
-                <element signature="e#22#53#0" expanded="true" />
-              </folding>
+            <state vertical-scroll-proportion="0.14655173" vertical-offset="0" max-vertical-offset="935">
+              <caret line="4" column="29" selection-start-line="4" selection-start-column="29" selection-end-line="4" selection-end-column="29" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -330,7 +328,11 @@
       <created>1422484070810</created>
       <updated>1422484070810</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Manually created some sample auction items in the MongoDB database, auctions items have a unique ID and also a start time, loaded these items into application">
+      <created>1422484215350</created>
+      <updated>1422484215350</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -375,7 +377,8 @@
     </option>
     <MESSAGE value="Made a connection to a MongoDB database from a Python application" />
     <MESSAGE value="Make a connection to 0mq from the application" />
-    <option name="LAST_COMMIT_MESSAGE" value="Make a connection to 0mq from the application" />
+    <MESSAGE value="Manually created some sample auction items in the MongoDB database, auctions items have a unique ID and also a start time, loaded these items into application" />
+    <option name="LAST_COMMIT_MESSAGE" value="Manually created some sample auction items in the MongoDB database, auctions items have a unique ID and also a start time, loaded these items into application" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -385,11 +388,9 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/ScheduleAuction.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3836478" vertical-offset="106" max-vertical-offset="595">
-          <caret line="17" column="17" selection-start-line="17" selection-start-column="17" selection-end-line="17" selection-end-column="17" />
-          <folding>
-            <element signature="e#22#53#0" expanded="true" />
-          </folding>
+        <state vertical-scroll-proportion="0.14655173" vertical-offset="0" max-vertical-offset="935">
+          <caret line="4" column="29" selection-start-line="4" selection-start-column="29" selection-end-line="4" selection-end-column="29" />
+          <folding />
         </state>
       </provider>
     </entry>
