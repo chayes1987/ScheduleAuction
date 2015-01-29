@@ -53,15 +53,26 @@ class AuctionScheduler:
         publisher = context.socket(zmq.PUB)
         publisher.bind(PUBLISHER_ADDRESS)
 
+    @staticmethod
+    def initialize_mongo():
+        mongo_client = None
+        try:
+            mongo_client = MongoClient()
+        except (Exception, SystemExit):
+            print('Error connecting to MongoDB...')
+            pass
+
+        return mongo_client
 
 if __name__ == '__main__':
     auctionScheduler = AuctionScheduler()
-    client = MongoClient()
-    print('Connected to MongoDB...')
-    db = client.AuctionData
-    jobs = auctionScheduler.get_auction_items(db)
-    print('Auction items retrieved...')
-    auctionScheduler.initialize_publisher()
-    print('Publisher initialized...')
-    auctionScheduler.initialize_scheduler(jobs)
-    print('Scheduler initialized...')
+    client = auctionScheduler.initialize_mongo()
+    if None != client:
+        print('Connected to MongoDB...')
+        db = client.AuctionData
+        jobs = auctionScheduler.get_auction_items(db)
+        print('Auction items retrieved...')
+        auctionScheduler.initialize_publisher()
+        print('Publisher initialized...')
+        auctionScheduler.initialize_scheduler(jobs)
+        print('Scheduler initialized...')
