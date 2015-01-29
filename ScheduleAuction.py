@@ -12,6 +12,8 @@ import zmq
 
 publisher = None
 context = zmq.Context()
+PUBLISHER_ADDRESS = 'tcp://127.0.0.1:1000'
+DATE_FORMAT = '%d-%m-%Y %H:%M:%S'
 
 
 class AuctionScheduler:
@@ -23,13 +25,13 @@ class AuctionScheduler:
     @staticmethod
     def publish_start_auction_command(item_id):
         if None != publisher:
-            message = "StartAuction #{id}".format(id=item_id)
+            message = "StartAuction <id>{id}</id>".format(id=item_id)
             publisher.send_string(message)
             print(message + " command published...")
 
     def schedule_jobs(self, sched, auction_items):
         for item in auction_items:
-            start_time = datetime.strptime(item['start_time'], '%d-%m-%Y %H:%M:%S')
+            start_time = datetime.strptime(item['start_time'], DATE_FORMAT)
             if start_time > datetime.now():
                 item_id = item['_id']
                 sched.add_job(self.publish_start_auction_command, 'date', run_date=start_time, args=[item_id])
@@ -49,7 +51,7 @@ class AuctionScheduler:
     def initialize_publisher():
         global publisher
         publisher = context.socket(zmq.PUB)
-        publisher.bind('tcp://127.0.0.1:1000')
+        publisher.bind(PUBLISHER_ADDRESS)
 
 
 if __name__ == '__main__':
