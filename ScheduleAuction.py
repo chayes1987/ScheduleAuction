@@ -9,10 +9,12 @@ from pymongo import MongoClient
 from apscheduler.schedulers.background import BlockingScheduler
 from datetime import datetime
 import zmq
+import threading
 
 publisher = None
 context = zmq.Context()
-PUBLISHER_ADDRESS = 'tcp://127.0.0.1:1000'
+SUBSCRIBER_ADDRESS = 'tcp://127.0.0.1:0001'
+PUBLISHER_ADDRESS = 'tcp://127.0.0.1:0002'
 DATE_FORMAT = '%d-%m-%Y %H:%M:%S'
 
 
@@ -53,6 +55,22 @@ class AuctionScheduler:
         publisher = context.socket(zmq.PUB)
         publisher.bind(PUBLISHER_ADDRESS)
 
+    def initialize_subscriber(self):
+        thread = threading.Thread(target=self.subscribe)
+        thread.daemon = True
+        thread.start()
+
+    @staticmethod
+    def subscribe():
+        subscriber = context.socket(zmq.SUB)
+        subscriber.connect(SUBSCRIBER_ADDRESS)
+        subscriber.setsockopt(zmq.SUBSCRIBE, str.encode('ACK: '))
+
+        while True:
+            msg = subscriber.recv()
+            m = msg.decode(encoding='UTF-8')
+            print(m)
+
     @staticmethod
     def initialize_mongo():
         mongo_client = None
@@ -74,5 +92,7 @@ if __name__ == '__main__':
         print('Auction items retrieved...')
         auctionScheduler.initialize_publisher()
         print('Publisher initialized...')
+        auctionScheduler.initialize_subscriber()
+        print('Subscriber initialized on separate thread...')
         auctionScheduler.initialize_scheduler(jobs)
         print('Scheduler initialized...')
