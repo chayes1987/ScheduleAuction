@@ -13,8 +13,8 @@ import threading
 
 publisher = None
 context = zmq.Context()
-SUBSCRIBER_ADDRESS = 'tcp://127.0.0.1:0001'
-PUBLISHER_ADDRESS = 'tcp://127.0.0.1:0002'
+ACK_ADDRESS = 'tcp://127.0.0.1:1000'
+PUBLISHER_ADDRESS = 'tcp://127.0.0.1:1001'
 DATE_FORMAT = '%d-%m-%Y %H:%M:%S'
 
 
@@ -63,8 +63,8 @@ class AuctionScheduler:
     @staticmethod
     def subscribe():
         subscriber = context.socket(zmq.SUB)
-        subscriber.connect(SUBSCRIBER_ADDRESS)
-        subscriber.setsockopt(zmq.SUBSCRIBE, str.encode('ACK: '))
+        subscriber.connect(ACK_ADDRESS)
+        subscriber.setsockopt(zmq.SUBSCRIBE, str.encode('ACK: StartAuction'))
 
         while True:
             msg = subscriber.recv()
