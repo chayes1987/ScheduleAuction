@@ -27,9 +27,9 @@ class AuctionScheduler:
     @staticmethod
     def publish_start_auction_command(item_id):
         if None != publisher:
-            message = "StartAuction <id>{id}</id>".format(id=item_id)
+            message = 'StartAuction <id>{id}</id>'.format(id=item_id)
             publisher.send_string(message)
-            print(message + " command published...")
+            print(message + ' command published...')
 
     def schedule_jobs(self, sched, auction_items):
         for item in auction_items:
