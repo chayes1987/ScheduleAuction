@@ -1,30 +1,54 @@
-Schedule Auction
-This is the scheduler service for my FYP. It is written in Python. It uses APScheduler for scheduling and also connects
-to a MongoDB database. It is responsible for scheduling auctions based on their start time.
+# _Project_
 
-Installation
+_Description: What does this project do and who does it serve?_
 
-Requires a Mongod instance running with correct database and collection.
+## Project Setup
 
-Usage
+_How do I, as a developer, start working on the project?_ 
 
-Used as part of an FYP in IT Tralee
+1. _What dependencies does it have (where are they expressed) and how do I install them?_
+2. _How can I see the project working before I change anything?_
 
-Contributing
+## Testing
 
-Fork it!
-Create your feature branch: git checkout -b my-new-feature
-Commit your changes: git commit -am 'Add some feature'
-Push to the branch: git push origin my-new-feature
-Submit a pull request :D
-History
+_How do I run the project's automated tests?_
 
-None
+### Unit Tests
 
-Credits
+1. `rake spec`
 
-Conor
+### Integration Tests
 
-License
+1. _Run other local services / provide credentials for external services._
+2. `rake spec:integration`
 
-No Licence
+## Deploying
+
+### _How to setup the deployment environment_
+
+- _Required heroku addons, packages, or chef recipes._
+- _Required environment variables or credentials not included in git._
+- _Monitoring services and logging._
+
+### _How to deploy_
+
+## Troubleshooting & Useful Tools
+
+_Examples of common tasks_
+
+> e.g.
+> 
+> - How to make curl requests while authenticated via oauth.
+> - How to monitor background jobs.
+> - How to run the app through a proxy.
+
+## Contributing changes
+
+- _Internal git workflow_
+- _Pull request guidelines_
+- _Tracker project_
+- _Google group_
+- _irc channel_
+- _"Please open github issues"_
+
+## License
