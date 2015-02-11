@@ -93,6 +93,6 @@ if __name__ == '__main__':
         auctionScheduler.initialize_publisher()
         print('Publisher initialized...')
         auctionScheduler.initialize_subscriber()
-        print('Subscriber initialized on separate thread...')
+        print('Subscriber initialized...')
         auctionScheduler.initialize_scheduler(jobs)
         print('Scheduler initialized...')
