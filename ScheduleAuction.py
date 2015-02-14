@@ -2,7 +2,7 @@ __author__ = 'Conor'
 
 # The official documentation was consulted for all three 3rd party libraries used
 # Mongo -> http://api.mongodb.org/python/current/tutorial.html
-# ZeroMQ -> https://learning-0mq-with-pyzmq.readthedocs.org/en/latest/pyzmq/patterns/pubsub.html
+# 0mq -> https://learning-0mq-with-pyzmq.readthedocs.org/en/latest/pyzmq/patterns/pubsub.html
 # APScheduler -> https://apscheduler.readthedocs.org/en/latest/userguide.html#code-examples
 
 from pymongo import MongoClient
@@ -13,8 +13,8 @@ import threading
 
 publisher = None
 context = zmq.Context()
-ACK_ADDRESS = 'tcp://127.0.0.1:1000'
-PUBLISHER_ADDRESS = 'tcp://127.0.0.1:1001'
+ACK_ADDRESS = 'tcp://172.31.32.21:1000'
+PUBLISHER_ADDRESS = 'tcp://*:1001'
 DATE_FORMAT = '%d-%m-%Y %H:%M:%S'
 
 
