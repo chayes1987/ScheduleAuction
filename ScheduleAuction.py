@@ -13,7 +13,7 @@ import threading
 
 publisher = None
 context = zmq.Context()
-ACK_ADDRESS = 'tcp://172.31.32.21:1000'
+ACK_ADDRESS = 'tcp://172.31.32.21:1011'
 PUBLISHER_ADDRESS = 'tcp://*:1001'
 DATE_FORMAT = '%d-%m-%Y %H:%M:%S'
 
@@ -68,7 +68,7 @@ class AuctionScheduler:
 
         while True:
             msg = subscriber.recv()
-            m = msg.decode(encoding='UTF-8')
+            m = msg.decode()
             print(m)
 
     @staticmethod
