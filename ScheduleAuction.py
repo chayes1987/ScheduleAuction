@@ -36,7 +36,8 @@ class AuctionScheduler:
             start_time = datetime.strptime(item['start_time'], DATE_FORMAT)
             if start_time > datetime.now():
                 item_id = item['_id']
-                sched.add_job(self.publish_start_auction_command, 'date', run_date=start_time, args=[item_id])
+                sched.add_job(self.publish_start_auction_command,
+                              'date', run_date=start_time, args=[item_id])
 
     def initialize_scheduler(self, db_jobs):
         scheduler = BlockingScheduler()
