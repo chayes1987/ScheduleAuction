@@ -13,8 +13,8 @@ import threading
 
 publisher = None
 context = zmq.Context()
-ACK_ADDRESS = 'tcp://172.31.32.21:1011'
-PUBLISHER_ADDRESS = 'tcp://*:1001'
+ACK_ADDRESS = 'tcp://172.31.32.21:2100'
+PUBLISHER_ADDRESS = 'tcp://*:2000'
 DATE_FORMAT = '%d-%m-%Y %H:%M:%S'
 
 
