@@ -62,4 +62,4 @@ class ScheduleAuction:
         subscriber.setsockopt(zmq.SUBSCRIBE, str.encode(ack_topic))
 
         while True:
-            print(subscriber.recv().decode())
+            print('REC: ' + subscriber.recv().decode())
