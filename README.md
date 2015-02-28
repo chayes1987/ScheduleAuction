@@ -24,7 +24,7 @@ None
 - Created AWS EC2 Linux instance
 - Connected to instance using FileZilla using Public DNS and .pem keyfile
 - Uploaded application directory to server
-- Connected to server instance using PuTTy using ec2-user@PublicDNS and .pem keyfile for SSH Auth
+- Connected to server instance using PuTTy using ec2-user@PublicDNS and .ppk keyfile for SSH Auth
 - Installed Mongo -> http://michaelconnor.org/2013/07/install-mongodb-on-amazon-64-bit-linux/
   and ran mongo daemon
 - Created Mongo database called 'AuctionData' - mongo AuctionData
