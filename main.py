@@ -42,7 +42,6 @@ def schedule_items(jobs, config):
     sched.initialize_subscriber(config[Config.ACK_ADDRESS], config[Config.ACK_TOPIC])
     print('Subscriber initialized...')
     sched.initialize_scheduler(jobs, config[Config.TOPIC])
-    print('Scheduler initialized...')
 
 
 if __name__ == '__main__':

@@ -32,6 +32,7 @@ class ScheduleAuction:
 
     def initialize_scheduler(self, db_jobs, topic):
         scheduler = BlockingScheduler()
+        print('Scheduler initialized...')
         self.schedule_jobs(scheduler, db_jobs, topic)
         print('Scheduler Running...')
 
@@ -48,9 +49,11 @@ class ScheduleAuction:
         publisher.bind(pub_addr)
 
     def initialize_subscriber(self, ack_adr, ack_topic):
-        threading.Thread(target=self.subscribe,
-                         kwargs={'ack_adr': ack_adr, 'ack_topic': str(ack_topic)},
-                         name='subscribe').start()
+        thread = threading.Thread(target=self.subscribe,
+                                  kwargs={'ack_adr': ack_adr, 'ack_topic': str(ack_topic)},
+                                  name='subscribe')
+        thread.daemon = True
+        thread.start()
 
     @staticmethod
     def subscribe(ack_adr, ack_topic):
