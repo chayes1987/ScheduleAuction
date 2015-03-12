@@ -10,3 +10,7 @@ class Config(Enum):
     ACK_ADDRESS = 1
     TOPIC = 2
     ACK_TOPIC = 3
+    HEARTBEAT_TOPIC = 4
+    HEARTBEAT_RESPONSE = 5
+    SUB_ADDRESS = 6
+    SERVICE_NAME = 7
