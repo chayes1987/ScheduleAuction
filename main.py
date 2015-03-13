@@ -44,7 +44,8 @@ def schedule_items(jobs, config):
     sched.initialize_publisher(config[Config.PUB_ADDRESS])
     print('Publisher initialized...')
     sched.initialize_subscribers(config[Config.ACK_ADDRESS], config[Config.SUB_ADDRESS], config[Config.ACK_TOPIC],
-                                 config[Config.HEARTBEAT_TOPIC], config[Config.HEARTBEAT_RESPONSE], config[Config.SERVICE_NAME])
+                                 config[Config.HEARTBEAT_TOPIC], config[Config.HEARTBEAT_RESPONSE],
+                                 config[Config.SERVICE_NAME])
     print('Subscriber initialized...')
     sched.initialize_scheduler(jobs, config[Config.TOPIC])
 
