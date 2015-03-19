@@ -49,13 +49,13 @@ class ScheduleAuction:
 
     def initialize_subscribers(self, ack_addr, sub_addr, ack_topic, heartbeat_topic, response_topic, service_name):
         ack_thread = threading.Thread(target=self.subscribe_to_ack,
-                                      kwargs={'ack_adr': ack_addr, 'ack_topic': str(ack_topic)},
+                                      kwargs={'ack_addr': ack_addr, 'ack_topic': str(ack_topic)},
                                       name='subscribe_to_ack')
         ack_thread.daemon = True
         ack_thread.start()
 
         heartbeat_thread = threading.Thread(target=self.subscribe_to_heartbeat,
-                                            kwargs={'sub_adr': sub_addr, 'heartbeat_topic': str(heartbeat_topic),
+                                            kwargs={'sub_addr': sub_addr, 'heartbeat_topic': str(heartbeat_topic),
                                                     'response_topic': response_topic, 'service_name': service_name},
                                             name='subscribe_to_heartbeat')
         heartbeat_thread.daemon = True
