@@ -26,8 +26,9 @@ class ScheduleAuction:
         for auction_item in auction_items:
             auction_start_time = datetime.strptime(auction_item['start_time'], '%d-%m-%Y %H:%M:%S')
             if auction_start_time > datetime.now():
+                auction_item_id = auction_item['_id']
                 sched.add_job(self.publish_start_auction_command, 'date', run_date=auction_start_time,
-                              kwargs={'item_id': auction_item['_id'], 'topic': topic})
+                              kwargs={'auction_item_id': auction_item_id, 'topic': topic})
 
     def initialize_scheduler(self, db_jobs, topic):
         scheduler = BlockingScheduler()
@@ -62,18 +63,18 @@ class ScheduleAuction:
         heartbeat_thread.start()
 
     @staticmethod
-    def subscribe_to_ack(ack_adr, ack_topic):
+    def subscribe_to_ack(ack_addr, ack_topic):
         ack_subscriber = context.socket(zmq.SUB)
-        ack_subscriber.connect(ack_adr)
+        ack_subscriber.connect(ack_addr)
         ack_subscriber.setsockopt(zmq.SUBSCRIBE, str.encode(ack_topic))
 
         while True:
             print('REC: ' + ack_subscriber.recv().decode())
 
     @staticmethod
-    def subscribe_to_heartbeat(sub_adr, heartbeat_topic, response_topic, service_name):
+    def subscribe_to_heartbeat(sub_addr, heartbeat_topic, response_topic, service_name):
         heartbeat_subscriber = context.socket(zmq.SUB)
-        heartbeat_subscriber.connect(sub_adr)
+        heartbeat_subscriber.connect(sub_addr)
         heartbeat_subscriber.setsockopt(zmq.SUBSCRIBE, str.encode(heartbeat_topic))
 
         while True:
