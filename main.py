@@ -26,27 +26,28 @@ def read_config():
         conf.read_file(open('config.ini'))
         pub_address = conf.get('Addresses', 'PUB_ADDR')
         ack_address = conf.get('Addresses', 'ACK_ADDR')
-        topic = conf.get('Topics', 'START_AUCTION_TOPIC')
+        start_auction_topic = conf.get('Topics', 'START_AUCTION_TOPIC')
         ack_topic = conf.get('Topics', 'START_AUCTION_ACK_TOPIC')
         heartbeat_topic = conf.get('Topics', 'CHECK_HEARTBEAT_TOPIC')
         response_topic = conf.get('Topics', 'CHECK_HEARTBEAT_TOPIC_RESPONSE')
-        sub_address = conf.get('Addresses', 'SUB_ADDR')
+        heartbeat_address = conf.get('Addresses', 'HEARTBEAT_ADDR')
         service_name = conf.get('Service Name', 'SERVICE_NAME')
     except (IOError, Error):
         print('Error with config file...')
         return None
 
-    return pub_address, ack_address, topic, ack_topic, heartbeat_topic, response_topic, sub_address, service_name
+    return pub_address, ack_address, start_auction_topic, ack_topic, heartbeat_topic, response_topic,\
+        heartbeat_address, service_name
 
 
 def setup_scheduler(jobs, config):
     scheduler = ScheduleAuction()
     scheduler.initialize_publisher(config[Config.PUB_ADDR])
     print('Publisher initialized...')
-    scheduler.initialize_subscribers(config[Config.ACK_ADDR], config[Config.SUB_ADDR], config[Config.ACK_TOPIC],
-                                     config[Config.HEARTBEAT_TOPIC], config[Config.HEARTBEAT_RESPONSE],
-                                     config[Config.SERVICE_NAME])
-    print('Subscriber initialized...')
+    scheduler.initialize_ack_subscriber(config[Config.ACK_ADDR], config[Config.ACK_TOPIC])
+    scheduler.initialize_heartbeat_subscriber(config[Config.HEARTBEAT_ADDR], config[Config.HEARTBEAT_TOPIC],
+                                              config[Config.HEARTBEAT_RESPONSE], config[Config.SERVICE_NAME])
+    print('Subscribers initialized...')
     scheduler.initialize_scheduler(jobs, config[Config.TOPIC])
 
 

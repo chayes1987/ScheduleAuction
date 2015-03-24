@@ -12,5 +12,5 @@ class Config(Enum):
     ACK_TOPIC = 3
     HEARTBEAT_TOPIC = 4
     HEARTBEAT_RESPONSE = 5
-    SUB_ADDR = 6
+    HEARTBEAT_ADDR = 6
     SERVICE_NAME = 7

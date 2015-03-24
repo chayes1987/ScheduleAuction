@@ -48,13 +48,14 @@ class ScheduleAuction:
         publisher = context.socket(zmq.PUB)
         publisher.bind(pub_addr)
 
-    def initialize_subscribers(self, ack_addr, sub_addr, ack_topic, heartbeat_topic, response_topic, service_name):
+    def initialize_ack_subscriber(self, ack_addr, ack_topic):
         ack_thread = threading.Thread(target=self.subscribe_to_ack,
                                       kwargs={'ack_addr': ack_addr, 'ack_topic': str(ack_topic)},
                                       name='subscribe_to_ack')
         ack_thread.daemon = True
         ack_thread.start()
 
+    def initialize_heartbeat_subscriber(self, sub_addr, heartbeat_topic, response_topic, service_name):
         heartbeat_thread = threading.Thread(target=self.subscribe_to_heartbeat,
                                             kwargs={'sub_addr': sub_addr, 'heartbeat_topic': str(heartbeat_topic),
                                                     'response_topic': response_topic, 'service_name': service_name},
