@@ -41,9 +41,9 @@ def read_config():
 
 def setup_scheduler(jobs, config):
     scheduler = ScheduleAuction()
-    scheduler.initialize_publisher(config[Config.PUB_ADDRESS])
+    scheduler.initialize_publisher(config[Config.PUB_ADDR])
     print('Publisher initialized...')
-    scheduler.initialize_subscribers(config[Config.ACK_ADDRESS], config[Config.SUB_ADDRESS], config[Config.ACK_TOPIC],
+    scheduler.initialize_subscribers(config[Config.ACK_ADDR], config[Config.SUB_ADDR], config[Config.ACK_TOPIC],
                                      config[Config.HEARTBEAT_TOPIC], config[Config.HEARTBEAT_RESPONSE],
                                      config[Config.SERVICE_NAME])
     print('Subscriber initialized...')
