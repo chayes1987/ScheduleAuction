@@ -16,19 +16,21 @@ context = zmq.Context()
 class ScheduleAuction:
 
     @staticmethod
-    def publish_start_auction_command(auction_item_id, topic):
+    def publish_start_auction_command(item_id, topic):
         if None != publisher:
-            start_auction_command = topic + ' <id>{id}</id>'.format(id=auction_item_id)
+            start_auction_command = topic + ' <id>{id}</id>'.format(id=item_id)
             publisher.send_string(start_auction_command)
             print('PUB: ' + start_auction_command)
 
     def schedule_auctions(self, sched, auction_items, topic):
         for auction_item in auction_items:
-            auction_start_time = datetime.strptime(auction_item['start_time'], '%d-%m-%Y %H:%M:%S')
+            auction_start_time = datetime.strptime(auction_item['start_time'],
+                                                   '%d-%m-%Y %H:%M:%S')
             if auction_start_time > datetime.now():
-                auction_item_id = auction_item['_id']
-                sched.add_job(self.publish_start_auction_command, 'date', run_date=auction_start_time,
-                              kwargs={'auction_item_id': auction_item_id, 'topic': topic})
+                item_id = auction_item['_id']
+                sched.add_job(self.publish_start_auction_command, 'date',
+                              run_date=auction_start_time,
+                              kwargs={'item_id': item_id, 'topic': topic})
 
     def initialize_scheduler(self, db_jobs, topic):
         scheduler = BlockingScheduler()
