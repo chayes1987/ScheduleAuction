@@ -6,6 +6,7 @@
       <w>pubsub</w>
       <w>pyzmq</w>
       <w>userguide</w>
+      <w>zeromq</w>
     </words>
   </dictionary>
 </component>
