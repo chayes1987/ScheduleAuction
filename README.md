@@ -33,6 +33,7 @@ None
 	db.auctions.insert({"_id" : "2", "start_time" : "10-02-2015 16:43:00"})
 
 ## Application Setup Required
+
 - Installed pymongo -> sudo easy_install pymongo
 - Installed apscheduler -> sudo easy_install apscheduler
 - Installed gcc -> sudo yum install gcc-c++
@@ -45,5 +46,6 @@ None
 - Installed enum -> sudo easy_install enum
 
 - Running the service -> sudo python /home/ec2-user/ScheduleAuction/main.py
+- Testing the service -> sudo python /home/ec2-user/ScheduleAuction/scheduleauctiontest.py
 
 - Service runs and works as expected

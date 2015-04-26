@@ -2,6 +2,7 @@ __author__ = 'Conor'
 
 # Mongo -> http://api.mongodb.org/python/current/tutorial.html
 # Config file -> https://docs.python.org/2/library/configparser.html
+# Coding Standards -> https://www.python.org/dev/peps/pep-0008/
 
 from scheduleauction import ScheduleAuction
 from pymongo import MongoClient
@@ -10,6 +11,10 @@ from config import Config
 
 
 def initialize_mongo():
+    """
+    Initializes a Mongo client object
+    :return: The Mongo client
+    """
     mongo_client = None
     try:
         mongo_client = MongoClient()
@@ -21,8 +26,13 @@ def initialize_mongo():
 
 
 def read_config():
+    """
+    Reads the configuration file
+    :return: A tuple with the entries from the file, None if exception
+    """
     conf = ConfigParser()
     try:
+        # Open the file and extract the contents
         conf.read_file(open('config.ini'))
         pub_address = conf.get('Addresses', 'PUB_ADDR')
         ack_address = conf.get('Addresses', 'ACK_ADDR')
@@ -41,6 +51,12 @@ def read_config():
 
 
 def setup_scheduler(jobs, config):
+    """
+    Setup the scheduling, pub/sub functionality
+    :param jobs: The jobs to schedule
+    :param config: The contents of the configuration file
+    :return: Nothing
+    """
     scheduler = ScheduleAuction()
     scheduler.initialize_publisher(config[Config.PUB_ADDR])
     print('Publisher initialized...')
@@ -53,12 +69,15 @@ def setup_scheduler(jobs, config):
 
 if __name__ == '__main__':
     mongo = initialize_mongo()
+    # Check Mongo
     if None != mongo:
         print('Connected to MongoDB...')
         database = mongo.AuctionData
+        # Check Database
         if None != database:
             auctions = database.auctions.find()
             configuration = read_config()
+        # Check configuration and auctions
         if None != configuration and None != auctions:
             print('Auction items retrieved...\nConfiguration read...')
             setup_scheduler(auctions, configuration)
